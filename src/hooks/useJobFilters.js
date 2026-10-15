@@ -1,6 +1,12 @@
 import { useState, useMemo } from 'react'
 import { jobs as allJobs } from '../data/jobs'
 
+const EXPERIENCE_MAP = {
+  '2': '2-4 Yrs',
+  '3': '3-5 Yrs',
+  '4': '4-6 Yrs'
+}
+
 export function useJobFilters() {
   const [filters, setFilters] = useState({ keyword: '', location: '', experience: '' })
   const [category, setCategory] = useState('')
@@ -29,7 +35,7 @@ export function useJobFilters() {
         )
 
       const matchesLocation = !loc || job.location.toLowerCase().includes(loc)
-      const matchesExperience = !exp || job.experience.includes(exp)
+      const matchesExperience = !exp || job.experience === (EXPERIENCE_MAP[exp] || exp)
       const matchesCategory = !category || job.category === category
 
       return matchesQuery && matchesLocation && matchesExperience && matchesCategory

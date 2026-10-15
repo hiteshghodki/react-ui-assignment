@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import JobCard from './JobCard'
 import JobSkeleton from './JobSkeleton'
-import EmptyState from '../ui/EmptyState'
+import EmptyState from '../EmptyState'
 
 const JobList = forwardRef(function JobList(
   {
