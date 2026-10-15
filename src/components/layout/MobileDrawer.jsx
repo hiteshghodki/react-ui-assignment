@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { BriefcaseBusiness, X } from 'lucide-react'
 import { navItems as defaultNavItems } from '../../constants/navigation'
+import profileImage from '../../assets/profile.png'
 
 export default function MobileDrawer({
   isOpen,
@@ -10,6 +11,7 @@ export default function MobileDrawer({
   onTabClick,
   savedCount
 }) {
+  const [avatarError, setAvatarError] = useState(false)
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
     return () => {
@@ -54,19 +56,20 @@ export default function MobileDrawer({
           {/* User Profile Card */}
           <div className="mt-4 flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700 overflow-hidden ring-1 ring-slate-200">
-              <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop&crop=faces&q=80"
-                alt="Rohit Sharma"
-                className="h-full w-full object-cover"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none'
-                }}
-              />
-              <span>RS</span>
+              {avatarError ? (
+                <span>RS</span>
+              ) : (
+                <img
+                  src={profileImage}
+                  alt="Ajay Sharma"
+                  className="h-full w-full object-cover"
+                  onError={() => setAvatarError(true)}
+                />
+              )}
             </div>
             <div>
-              <p className="text-sm font-bold text-slate-900">Rohit Sharma</p>
-              <p className="text-xs text-slate-500">rohit.sharma@example.com</p>
+              <p className="text-sm font-bold text-slate-900">Ajay sharma</p>
+              <p className="text-xs text-slate-500">ajay.sharma@example.com</p>
             </div>
           </div>
 

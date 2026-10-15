@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BriefcaseBusiness, ChevronDown, Menu, Bell } from 'lucide-react'
 import { navItems } from '../../constants/navigation'
 import MobileDrawer from './MobileDrawer'
+import profileImage from '../../assets/profile.png'
 
 function Brand() {
   return (
@@ -18,6 +19,7 @@ function Brand() {
 
 export default function Header({ savedCount, activeTab, onTabClick }) {
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [avatarError, setAvatarError] = useState(false)
 
   return (
     <>
@@ -80,18 +82,19 @@ export default function Header({ savedCount, activeTab, onTabClick }) {
             {/* Profile Dropdown */}
             <div className="hidden sm:flex items-center gap-1.5 lg:gap-2 pl-1 cursor-pointer select-none">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 text-xs font-bold text-slate-700 overflow-hidden ring-1 ring-slate-200 shrink-0">
-                <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop&crop=faces&q=80"
-                  alt="Rohit Sharma"
-                  className="h-full w-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none'
-                  }}
-                />
-                <span className="font-semibold text-xs text-slate-700">RS</span>
+                {avatarError ? (
+                  <span className="font-semibold text-xs text-slate-700">RS</span>
+                ) : (
+                  <img
+                    src={profileImage}
+                    alt="Ajay Sharma"
+                    className="h-full w-full object-cover"
+                    onError={() => setAvatarError(true)}
+                  />
+                )}
               </div>
               <span className="text-xs lg:text-sm font-semibold text-slate-800 whitespace-nowrap">
-                Rohit Sharma
+                Ajay sharma
               </span>
               <ChevronDown size={14} className="text-slate-400 shrink-0" />
             </div>
